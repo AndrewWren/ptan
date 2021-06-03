@@ -16,8 +16,8 @@ class ArgmaxActionSelector(ActionSelector):
     Selects actions using argmax
     """
     def __call__(self, scores):
-        assert isinstance(scores, np.ndarray)
-        return torch.argmax(scores, axis=1)
+        # assert isinstance(scores, np.ndarray)
+        return torch.argmax(scores, dim=-1)
 
 
 class EpsilonGreedyActionSelector(ActionSelector):
