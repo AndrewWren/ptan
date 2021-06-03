@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 from typing import Union
 
 
@@ -16,7 +17,7 @@ class ArgmaxActionSelector(ActionSelector):
     """
     def __call__(self, scores):
         assert isinstance(scores, np.ndarray)
-        return np.argmax(scores, axis=1)
+        return torch.argmax(scores, axis=1)
 
 
 class EpsilonGreedyActionSelector(ActionSelector):
@@ -25,7 +26,7 @@ class EpsilonGreedyActionSelector(ActionSelector):
         self.selector = selector if selector is not None else ArgmaxActionSelector()
 
     def __call__(self, scores):
-        assert isinstance(scores, np.ndarray)
+        # assert isinstance(scores, np.ndarray)
         batch_size, n_actions = scores.shape
         actions = self.selector(scores)
         mask = np.random.random(size=batch_size) < self.epsilon
@@ -39,7 +40,7 @@ class ProbabilityActionSelector(ActionSelector):
     Converts probabilities of actions into action by sampling them
     """
     def __call__(self, probs):
-        assert isinstance(probs, np.ndarray)
+        # assert isinstance(probs, np.ndarray)
         actions = []
         for prob in probs:
             actions.append(np.random.choice(len(prob), p=prob))
