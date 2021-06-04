@@ -30,8 +30,8 @@ class ExperienceSource:
         :param steps_delta: how many steps to do between experience items
         :param vectorized: support of vectorized envs from OpenAI universe
         """
-        assert isinstance(env, (gym.Env, list, tuple))
-        assert isinstance(agent, BaseAgent)
+        # assert isinstance(env, (gym.Env, list, tuple))
+        # assert isinstance(agent, BaseAgent)
         assert isinstance(steps_count, int)
         assert steps_count >= 1
         assert isinstance(vectorized, bool)
